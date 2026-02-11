@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fabrikam 5S Modülü</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>Fabrikam Operasyonel Mükemmellik</h1>
+        <p>5S Yönetim Modülü · Baseline</p>
+      </div>
+      <div class="badge">v0.1</div>
+    </header>
+
+    <main class="layout">
+      <aside class="menu">
+        <button class="menu-item active" data-screen="field">5S Saha Tanımlama</button>
+        <button class="menu-item" data-screen="safety">İSG Değerlendirme</button>
+        <button class="menu-item" data-screen="audit">Denetim</button>
+      </aside>
+
+      <section class="content">
+        <article id="screen-field" class="screen active">
+          <h2>5S Saha Tanımlama</h2>
+          <p>
+            Müdürlükler, alt 5S sahaları ve ekipman kırılımı için ağaç yapıdan tanımlama
+            yapın. Her seviyede sorumlu ataması zorunludur.
+          </p>
+
+          <div class="grid-2">
+            <div class="card">
+              <h3>Ağaç Yapısı</h3>
+              <div class="toolbar">
+                <button id="add-division">+ Bölüm Ekle</button>
+                <button id="add-child" disabled>+ Alt Saha Ekle</button>
+              </div>
+              <ul id="tree" class="tree"></ul>
+            </div>
+
+            <div class="card">
+              <h3>Seçili Kırılım Detayı</h3>
+              <div id="node-details" class="placeholder">
+                Ağaçtan bir düğüm seçin.
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article id="screen-safety" class="screen">
+          <h2>İSG Değerlendirme</h2>
+          <p>Tanımlı saha için risk seviyesi ve tek nokta eğitim kayıtlarını yönetin.</p>
+
+          <div class="card">
+            <div class="grid-3">
+              <label>
+                Saha
+                <select id="safety-area"></select>
+              </label>
+              <label>
+                Risk Seviyesi
+                <select id="risk-level">
+                  <option value="düşük">Düşük</option>
+                  <option value="orta">Orta</option>
+                  <option value="yüksek">Yüksek</option>
+                </select>
+              </label>
+              <button id="save-risk" class="align-end">Risk Kaydet</button>
+            </div>
+
+            <h3>Tek Nokta Eğitim Çizelgesi</h3>
+            <div class="grid-3">
+              <input id="tne-code" placeholder="Kod" />
+              <input id="tne-name" placeholder="Eğitim Adı" />
+              <button id="add-tne">Ekle</button>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Kod</th>
+                  <th>Eğitim</th>
+                  <th>Tarih</th>
+                </tr>
+              </thead>
+              <tbody id="tne-list"></tbody>
+            </table>
+          </div>
+        </article>
+
+        <article id="screen-audit" class="screen">
+          <h2>Denetim</h2>
+          <p>Denetlenecek saha için 1S değerlendirme formunu doldurun.</p>
+
+          <div class="card">
+            <div class="grid-4">
+              <label>
+                Saha
+                <select id="audit-area"></select>
+              </label>
+              <label>
+                Mevcut S Seviyesi
+                <input id="current-s" readonly />
+              </label>
+              <label>
+                Denetim S Seviyesi
+                <select id="target-s">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+              </label>
+              <label>
+                Denetçi
+                <input id="auditor" readonly />
+              </label>
+            </div>
+
+            <div class="meta">
+              <span id="audit-area-name"></span>
+              <span id="audit-owner"></span>
+              <span id="audit-date"></span>
+            </div>
+
+            <h3>1S Denetim Formu</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Kategori</th>
+                  <th>Puan (0-5)</th>
+                  <th>Uygunsuzluk</th>
+                </tr>
+              </thead>
+              <tbody id="audit-categories"></tbody>
+            </table>
+
+            <div class="result-row">
+              <strong>Toplam Puan: <span id="audit-total">0</span> / 25</strong>
+              <strong id="audit-status">S Seviyesi Kazanımı İçin En Az 19 Gerekli</strong>
+              <button id="save-audit">Denetimi Kaydet</button>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <datalist id="personnel-options"></datalist>
+    <script src="app.js"></script>
+  </body>
+</html>
